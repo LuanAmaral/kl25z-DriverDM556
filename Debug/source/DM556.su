@@ -1,0 +1,16 @@
+fsl_gpio.h:175:20:void GPIO_SetPinsOutput(GPIO_Type*, uint32_t)	16	static
+fsl_gpio.h:186:20:void GPIO_ClearPinsOutput(GPIO_Type*, uint32_t)	16	static
+fsl_gpio.h:197:20:void GPIO_TogglePinsOutput(GPIO_Type*, uint32_t)	16	static
+fsl_pit.h:229:24:uint32_t PIT_GetStatusFlags(PIT_Type*, pit_chnl_t)	16	static
+fsl_pit.h:242:20:void PIT_ClearStatusFlags(PIT_Type*, pit_chnl_t, uint32_t)	24	static
+fsl_pit.h:268:20:void PIT_SetTimerPeriod(PIT_Type*, pit_chnl_t, uint32_t)	24	static
+fsl_pit.h:308:20:void PIT_StartTimer(PIT_Type*, pit_chnl_t)	16	static
+fsl_pit.h:322:20:void PIT_StopTimer(PIT_Type*, pit_chnl_t)	16	static
+DM556.cpp:27:1:DM556::DM556(GPIO_Type*, uint32_t, GPIO_Type*, uint32_t)	40	static
+DM556.cpp:41:1:DM556::~DM556()	16	static
+DM556.cpp:41:1:virtual DM556::~DM556()	16	static
+DM556.cpp:46:6:void DM556::set_configurations(int)	16	static
+DM556.cpp:50:6:void DM556::spin(float)	16	static
+DM556.cpp:58:6:void DM556::direct_spin(int)	24	static
+DM556.cpp:75:6:void DM556::inverse_spin(float)	24	static
+DM556.cpp:90:6:void DM556::delay(uint32_t)	32	static
