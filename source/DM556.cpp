@@ -47,6 +47,13 @@ void DM556::set_configurations(int _angPorPulso){
     angPorPulse = _angPorPulso;
 }
 
+void DM556::set_timer(uint32_t pulse_delay, pit_chnl_t chanel){
+	pit_channel  = chanel;
+	usec = pulse_delay;
+
+	PIT_SetTimerPeriod(PIT,pit_channel , USEC_TO_COUNT(usec,CLOCK_GetBusClkFreq()));
+}
+
 void DM556::spin(float angle){
 	if(angle < 0){
 		inverse_spin(angle);
@@ -64,7 +71,7 @@ void DM556::direct_spin(int angle){
 	printf("\n\r%d", angle);
 	for(int i =0; i< 2*pulse; i++){
 		GPIO_TogglePinsOutput(pulPort, 1u<<pulPin);
-		delay((uint32_t)3); //us
+		delay_pulse();
 	}
 	if(enaPin != 0){
 		GPIO_SetPinsOutput(enaPort, 1u<<enaPin);
@@ -80,19 +87,19 @@ void DM556::inverse_spin(float angle){
 	int pulse = (int)(angle / angPorPulse );
 	for(int i =0; i< 2*pulse; i++){
 		GPIO_TogglePinsOutput(pulPort, 1u<<pulPin);
-		delay((uint32_t)3); //us
+		delay_pulse();
 	}
 	if(enaPin != 0){
 		GPIO_SetPinsOutput(enaPort, 1u<<enaPin);
 	}
 }
 
-void DM556::delay(uint32_t usec){
-	PIT_SetTimerPeriod(PIT,kPIT_Chnl_1 , USEC_TO_COUNT(usec,CLOCK_GetBusClkFreq()));
-	PIT_StartTimer(PIT, kPIT_Chnl_1);
-	while(PIT_GetStatusFlags(PIT, kPIT_Chnl_1) != kPIT_TimerFlag);
-	PIT_StopTimer(PIT, kPIT_Chnl_1);
-	PIT_ClearStatusFlags(PIT, kPIT_Chnl_1 , kPIT_TimerFlag);
+void DM556::delay_pulse(){
+	PIT_StartTimer(PIT, pit_channel);
+	while(PIT_GetStatusFlags(PIT, pit_channel) != kPIT_TimerFlag);
+	PIT_StopTimer(PIT, pit_channel);
+	PIT_ClearStatusFlags(PIT, pit_channel , kPIT_TimerFlag);
+
 }
 
 

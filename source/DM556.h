@@ -22,6 +22,7 @@ public:
 	DM556(GPIO_Type* _pulPort, uint32_t _pulPin, GPIO_Type* _dirPort, uint32_t _dirPin, GPIO_Type* _enaPort, uint32_t _enaPin);
 	DM556(GPIO_Type* _pulPort, uint32_t _pulPin, GPIO_Type* _dirPort, uint32_t _dirPin);
 	void set_configurations(int _angPorPulso);
+	void set_timer(uint32_t pulse_delay, pit_chnl_t chanel);
 	void direct_spin(int angle);
 	void inverse_spin(float angle);
 	void spin(float angle);
@@ -36,7 +37,9 @@ private:
 	  uint32_t dirPin = 2;
 	  GPIO_Type* enaPort ;
 	  uint32_t enaPin = 3;
-	void   delay(uint32_t usec);
+	  uint32_t usec;
+	  pit_chnl_t pit_channel;
+	void delay_pulse();
 };
 
 #endif /* DM556_H_ */

@@ -10,7 +10,8 @@ DM556.cpp:27:1:DM556::DM556(GPIO_Type*, uint32_t, GPIO_Type*, uint32_t)	40	stati
 DM556.cpp:41:1:DM556::~DM556()	16	static
 DM556.cpp:41:1:virtual DM556::~DM556()	16	static
 DM556.cpp:46:6:void DM556::set_configurations(int)	16	static
-DM556.cpp:50:6:void DM556::spin(float)	16	static
-DM556.cpp:58:6:void DM556::direct_spin(int)	24	static
-DM556.cpp:75:6:void DM556::inverse_spin(float)	24	static
-DM556.cpp:90:6:void DM556::delay(uint32_t)	32	static
+DM556.cpp:50:6:void DM556::set_timer(uint32_t, pit_chnl_t)	48	static
+DM556.cpp:57:6:void DM556::spin(float)	16	static
+DM556.cpp:65:6:void DM556::direct_spin(int)	24	static
+DM556.cpp:82:6:void DM556::inverse_spin(float)	24	static
+DM556.cpp:97:6:void DM556::delay_pulse()	16	static

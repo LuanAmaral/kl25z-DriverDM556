@@ -59,6 +59,11 @@ int main(void) {
     /* Init FSL debug console. */
     BOARD_InitDebugConsole();
 #endif
+
+    static pit_config_t PIT_CONFIG;
+    PIT_CONFIG.enableRunInDebug = true;
+    PIT_Init(PIT, &PIT_CONFIG);
+
     LED_RED_ON();
     PRINTF("\rMotor de Passo com DM556\n ");
     DM556 driver(pul, dir);
@@ -66,13 +71,15 @@ int main(void) {
     int angPorPulso;
     PRINTF("\rRelacao ang por pulso: ");
     scanf("%d", &angPorPulso);
+
     driver.set_configurations(angPorPulso);
-    PRINTF("\n\r %d", 50);
+    driver.set_timer((uint32_t)0, kPIT_Chnl_0);
+
     while(1)
     {
     	int distAng;
     	LED_RED_TOGGLE();
-//    	PRINTF("\n\r ola %d", distAng);
+    	PRINTF("\n\r ola %d", distAng);
     	PRINTF("\n\rDistancia angular a percorrer : ");
     	scanf("%d", &distAng);
     	driver.spin(distAng);
